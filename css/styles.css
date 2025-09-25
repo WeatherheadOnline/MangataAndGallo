@@ -1,3 +1,12 @@
+:root {
+    --bkgd-nav: #222222;
+    --bkgd-articles: #33333355;
+    --text-underline: ;
+    --hover-shadow: ;
+    --h2-color-top: #fb9c9c;
+    --h2-color-bottom: #a047ff;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -44,7 +53,7 @@ header img {
 }
 
 nav {
-    background-color: #222222;
+    background-color: var(--bkgd-nav);
 }
 
 ul {
@@ -58,22 +67,29 @@ ul {
 main {
     display: grid;
     gap: 2rem;
-    grid-template-rows: 2;
-    grid-template-columns: 3;
-    min-height: 50vh;
-        /* on heigher-resolution screens or when the user zooms out, the viewport height will be taller as measured in pixels  */
-        /* and if that happens I still want the "main" element to take up a large amount of space on the screen */
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 }
 
 article {
     padding: 1rem;
-    background-color: #33333388;
+    background-color: var(--bkgd-articles);
+}
+
+h2 {
+    color: transparent;
+    background: linear-gradient(
+        var(--h2-color-top), 
+        var(--h2-color-bottom)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px #000000);
 }
 
 #featured {
     grid-column: 1 / span 3;
-    min-height: 20vh;
-        /* see note above, under the "main" element - I've applied the same idea here */
 }
 
 .sub-featured {
@@ -86,8 +102,8 @@ article {
 }
 
 .sub-featured img {
-    height: 5rem;
-    width: auto;
+    width: 9rem;
+    height: auto;
 }
 
 footer {
@@ -95,7 +111,7 @@ footer {
     justify-content: space-evenly;
     align-items: center;
     justify-self: flex-end;
-    background-color: #33333388;
+    background-color: var(--bkgd-articles);
 }
 
 footer > div {
@@ -144,11 +160,11 @@ footer img {
         ),
         repeating-linear-gradient(
             100deg,
-            black 10px,
+            #000000 10px,
             #111115 11px,
             #111115 13px,
-            black 14px,
-            black 20px   
+            #000000 14px,
+            #000000 20px   
         )
     ;
 }
