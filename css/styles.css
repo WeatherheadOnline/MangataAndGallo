@@ -1,12 +1,26 @@
+
+
+
+/*  Use a sans-serif font for <p> elements  */
+
+
+
+
+
+
 :root {
     --bkgd-nav: #222222;
-    --bkgd-articles: #33333355;
-    --text-underline: ;
-    --hover-shadow: ;
+    --bkgd-articles: #181818BB;
+    --bkgd-footer: #22222255;
     --h2-color-top: #ffffff;
     --h2-color-bottom: #daa520;
     --highlight: #daa520;
-    --links: hsl(43, 74%, 62%);
+    --links: #e6bd56;
+    --contrast-high: #000000;
+    --contrast: hsl(34, 100%, 4%);
+    --light-bkgd: #FFFFFF55;
+    --pinstripes: #060505;
+    --vignette: #00000088;
 }
 
 * {
@@ -14,18 +28,9 @@
     padding: 0;
 }
 
-body > * {
-    /* outline: 1px solid blue; */
-}
-
-header *, nav *, main *, footer * {
-    /* background-color: #00FF0055; */
-    /* outline: 1px solid #00FF00; */
-}    
-
 body {
     position: relative;
-    background-color: #000000;
+    background-color: var(--contrast);
     color: #E8E8E8;
     font-family: "Georgia", serif;
 }
@@ -39,7 +44,6 @@ body {
     justify-content: space-between;
     gap: 2rem;
     min-height: 100vh;  /* I want the footer to be no higher up than the bottom of the page, so I'm making its container's height 100% of the viewport */
-    /* outline: 1px solid red; */
 }
 
 a {
@@ -47,9 +51,9 @@ a {
 }
 
 a:hover {
-    background-color: #000000;
+    background-color: var(--contrast-high);
     color: var(--highlight);
-    transition: 0.5s;
+    transition: 0.3s;
 }
 
 header {
@@ -83,11 +87,9 @@ li {
     text-decoration-color: transparent;
     text-decoration-thickness: 2px;
     transition: 0.5s;
-    /* text-decoration: overline underline transparent solid 2px; */
 }
 
 li:hover {
-    /* text-decoration: overline underline var(--highlight) solid 2px; */
     text-decoration-line:  underline overline;
     text-decoration-color: var(--highlight);
     text-decoration-thickness: 2px;
@@ -104,30 +106,41 @@ main {
 article {
     padding: 1rem;
     background: radial-gradient(
-        transparent 25%,
+        transparent,
         var(--bkgd-articles)
     );
+    transition: box-shadow 0.5s;
 }
 
 article, footer {
-    outline: 1px solid #000000;
+    outline: 1px solid var(--contrast);
 }
 
 article:hover {
     box-shadow: 2px 4px 10px #daa52088, 1px 2px 5px #ffffff88;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 
 #featured {
-    grid-column: 1 / span 3;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
     justify-content: flex-end;
-    gap: 1rem;
+    grid-column: 1 / span 3;
     font-size: 1.3em;
-        /* I'm using "em" instead of "rem" because I want to update the font sizes relative to the size they would otherwise be, instead of relative to the root element. */
+        /* I'm using "em" instead of "rem" because I want these sizes relative to the size they would otherwise be, instead of relative to the root element. */
         /* That way I can increase the size of the h1 and p elements at the same time, and in proportion to each other. */
+    background-image: url(../img/necklace_quartz_05.jpg);
+    background-size: cover;
+    background-position: bottom;
+    color: var(--contrast);
+    text-align: right;
+    font-weight: bold;
+}
+
+h1, #featured p {
+    display: inline-block;
+    padding: 0.5rem;
+    background-color: var(--light-bkgd);
 }
 
 .sub-featured {
@@ -139,6 +152,11 @@ article:hover {
     gap: 1rem;
 }
 
+.sub-featured p {
+    line-height: 1.3em;
+    text-align: center;
+}
+
 .sub-featured img {
     width: 9rem;
     height: auto;
@@ -148,12 +166,12 @@ h2 {
     color: transparent;
     background: linear-gradient(
         var(--h2-color-top), 
-        var(--h2-color-bottom)
+        var(--h2-color-bottom) 90%
     );
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px #000000);
+    filter: drop-shadow(0 2px var(--contrast));
 }
 
 footer {
@@ -161,7 +179,7 @@ footer {
     justify-content: space-evenly;
     align-items: center;
     justify-self: flex-end;
-    background-color: var(--bkgd-articles);
+    background-color: var(--bkgd-footer);
 }
 
 footer > div {
@@ -182,8 +200,12 @@ footer img {
         font-size: 0.8em; /* using "em" units because I want the size to be updated relative to its own initial size, instead of relative to the root element */
     }
     main {
-        grid-template-rows: 2fr 1fr 1fr 1fr;
+        grid-template-rows: 3fr 2fr 2fr 2fr;
         grid-template-columns: 1;
+    }
+    #featured {
+        background-image: url(../img/necklace_quartz_05_small.jpg);
+        text-align: left;
     }
     #featured, .sub-featured {
         grid-column: unset;
@@ -191,30 +213,30 @@ footer img {
     .sub-featured p {
         max-width: 20rem;
     }
-    footer {
-        flex-direction: column;
+    footer > div {
+        width: unset;
     }
 }
 
 #background {
     z-index: -1;
     position: absolute;
-    height: 100vh;
+    height: 100%;
     width: 100vw;
     top: 0;
     left: 0;
     background-image: 
         radial-gradient(
-            transparent 10%,
-            #000000CC
+            transparent 40%,
+            var(--vignette)
         ),
         repeating-linear-gradient(
             100deg,
-            #000000 10px,
-            #111115 11px,
-            #111115 13px,
-            #000000 14px,
-            #000000 20px   
+            var(--contrast) 10px,
+            var(--pinstripes) 11px,
+            var(--pinstripes) 13px,
+            var(--contrast-high) 14px,
+            var(--contrast-high) 20px   
         )
     ;
 }
