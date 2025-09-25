@@ -23,7 +23,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     gap: 2rem;
-    min-height: 100vh;
+    min-height: 100vh;  /* I want the footer to be no higher up than the bottom of the page, so I'm making its container's height 100% of the viewport */
     outline: 1px solid red;
 }
 
@@ -53,6 +53,8 @@ main {
     grid-template-rows: 2;
     grid-template-columns: 3;
     min-height: 50vh;
+        /* on heigher-resolution screens or when the user zooms out, the viewport height will be taller as measured in pixels  */
+        /* and if that happens I still want the "main" element to take up a large amount of space on the screen */
 }
 
 article {
@@ -62,6 +64,7 @@ article {
 #featured {
     grid-column: 1 / span 3;
     min-height: 20vh;
+        /* see note above, under the "main" element - I've applied the same idea here */
 }
 
 .sub-featured {
@@ -87,7 +90,9 @@ footer {
 
 footer > div {
     text-align: center; 
-    width: 45vw;
+    width: 45vw; 
+        /* I want both columns to have roughly equal width, so that when they're centered, they look balanced */
+        /* by using relative units, the two columns will always be spaced out to fill the available space */
     padding: 1rem;
 }
 
@@ -97,6 +102,9 @@ footer img {
 }
 
 @media screen and (max-width: 699px) {
+    nav {
+        font-size: 0.8em; /* using "em" units because I want the size to be updated relative to its own initial size, instead of relative to the root element */
+    }
     main {
         grid-template-rows: 2fr 1fr 1fr 1fr;
         grid-template-columns: 1;
@@ -109,6 +117,5 @@ footer img {
     }
     footer {
         flex-direction: column;
-        position: static;
     }
 }
