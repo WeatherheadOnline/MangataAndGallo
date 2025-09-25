@@ -1,12 +1,6 @@
-
-
-
-/*  Use a sans-serif font for <p> elements  */
-
-
-
-
-
+/* I've used "rem" units throughout most of this project. */
+/* In some places, I've used "em" instead, where I want the size to be relative to the element's inital size, instead of relative to the root element, */
+/* for example, in the #featured article, to resize both the h1 and p elements at the same time, and in proportion to each other. */
 
 :root {
     --bkgd-nav: #222222;
@@ -46,16 +40,6 @@ body {
     min-height: 100vh;  /* I want the footer to be no higher up than the bottom of the page, so I'm making its container's height 100% of the viewport */
 }
 
-a {
-    color: var(--links);
-}
-
-a:hover {
-    background-color: var(--contrast-high);
-    color: var(--highlight);
-    transition: 0.3s;
-}
-
 header {
     height: 6rem;
     display: flex;
@@ -87,6 +71,7 @@ li {
     text-decoration-color: transparent;
     text-decoration-thickness: 2px;
     transition: 0.5s;
+    letter-spacing: 0.1em;
 }
 
 li:hover {
@@ -121,14 +106,16 @@ article:hover {
     transition: 0.3s;
 }
 
+p {
+    font-family: Arial, Helvetica, sans-serif;
+}                                
+
 #featured {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     grid-column: 1 / span 3;
     font-size: 1.3em;
-        /* I'm using "em" instead of "rem" because I want these sizes relative to the size they would otherwise be, instead of relative to the root element. */
-        /* That way I can increase the size of the h1 and p elements at the same time, and in proportion to each other. */
     background-image: url(../img/necklace_quartz_05.jpg);
     background-size: cover;
     background-position: bottom;
@@ -185,8 +172,8 @@ footer {
 footer > div {
     text-align: center; 
     width: 45vw; 
-        /* I want both columns to have roughly equal width, so that when they're centered, they look balanced */
-        /* by using relative units, the two columns will always be spaced out to fill the available space */
+        /* I want both columns to have roughly equal width, so that when they're centered, they look balanced. */
+        /* By using relative vw units, the two columns will always be spaced out to fill the available space */
     padding: 1rem;
 }
 
@@ -195,9 +182,19 @@ footer img {
     width: auto;
 }
 
+a {
+    color: var(--links);
+}                            
+
+a:hover {
+    background-color: var(--contrast-high);
+    color: var(--highlight);
+    transition: 0.3s;
+}                            
+
 @media screen and (max-width: 699px) {
     nav {
-        font-size: 0.8em; /* using "em" units because I want the size to be updated relative to its own initial size, instead of relative to the root element */
+        font-size: 0.8em; 
     }
     main {
         grid-template-rows: 3fr 2fr 2fr 2fr;
@@ -209,6 +206,9 @@ footer img {
     }
     #featured, .sub-featured {
         grid-column: unset;
+    }
+    .sub-featured img {
+        width: 7rem;
     }
     .sub-featured p {
         max-width: 20rem;
@@ -227,7 +227,7 @@ footer img {
     left: 0;
     background-image: 
         radial-gradient(
-            transparent 40%,
+            transparent 50%,
             var(--vignette)
         ),
         repeating-linear-gradient(
